@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
   node-red:
-    container_name: node-red-wsp
+    container_name: node-red-wsp-studio
     build: .
     ports:
-      - "1880:1880"
+      - "1980:1880"
     volumes:
       - ./data:/usr/src/app/data      # Carpeta persistente en Windows
       - ./flows:/usr/src/app/flows    # Almacén de flujos de Node-RED
