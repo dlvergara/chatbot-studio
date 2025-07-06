@@ -298,6 +298,49 @@
         "color": "#DDAA99"
     },
     {
+        "id": "e0f3ca8bbce2e760",
+        "type": "subflow",
+        "name": "Get Ignored numbers",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "150560f774646bbd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 900,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "a33f9a3206bd85bf",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 900,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "a33f9a3206bd85bf",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "d5f9b2d1bb7113be",
         "type": "whatsappLink",
         "cName": "whatsapp-web",
@@ -504,7 +547,7 @@
         "type": "function",
         "z": "919b80125f8dab08",
         "name": "Greetings",
-        "func": "msg.topic = \"Greetings\";\n\nmsg.payload = `👋 ¡Hola! Gracias por comunicarte con nosotros.\nSoy tu asistente virtual y estoy aquí para ayudarte. Por favor, responde con el número o la palabra clave que mejor se ajuste a lo que necesitas:\n0️⃣ Volver al menú principal (también puedes escribir \"volver\")\n1️⃣ Jugar al espejo\n2️⃣ ...\n3️⃣ Hablar con un asesor humano (o simplemente escribe \"*\")\n4️⃣ Otros\n💬 Escribe solo el número de la opción, la palabra \"volver\", o un asterisco (*) para continuar.\n`;\n\nmsg.openTextEnabled = false;\n\nreturn msg;",
+        "func": "msg.topic = \"Greetings\";\n\nmsg.payload = `👋 ¡Hola! Gracias por comunicarte con nosotros.\nSoy tu asistente virtual y estoy aquí para ayudarte. Por favor, responde con el número o la palabra clave que mejor se ajuste a lo que necesitas:\n0️⃣ Volver al menú principal (también puedes escribir \"volver\")\n1️⃣ Jugar al espejo\n2️⃣ Te enviara Hi!\n3️⃣ Hablar con un asesor humano (o simplemente escribe \"*\") hará forward de tu mensaje a otro número\n💬 Escribe solo el número de la opción o la palabra \"volver\" para continuar.\n`;\n\n//4️⃣ Otros\n\nmsg.openTextEnabled = false;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -953,6 +996,64 @@
         "wires": []
     },
     {
+        "id": "291dc9f55879b32b",
+        "type": "GSheet",
+        "z": "e0f3ca8bbce2e760",
+        "creds": "004040bbb696b17c",
+        "method": "get",
+        "action": "",
+        "sheet": "1phFkTS3ZbfgPIIsf2-XX3ngucy5PerascpBaux97Pjw",
+        "cells": "Sheet3!A1:A5000",
+        "flatten": false,
+        "name": "Get ignored numbers",
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "a33f9a3206bd85bf"
+            ]
+        ]
+    },
+    {
+        "id": "a33f9a3206bd85bf",
+        "type": "function",
+        "z": "e0f3ca8bbce2e760",
+        "name": "Find in the ignored collection",
+        "func": "msg.ignoredData = msg.payload;\nlet currentNumber = msg.from;\n\nlet sessionData = msg.ignoredData.filter(obj => obj[0] === currentNumber);\nlet rowId = msg.payload.findIndex(row => row[0] === currentNumber);\n\nif (sessionData !== undefined) {\n    return [null, msg];\n}\n\nmsg.payload = msg.originalPayload;\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 60,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "150560f774646bbd",
+        "type": "function",
+        "z": "e0f3ca8bbce2e760",
+        "name": "backUp",
+        "func": "msg.topic = \"ignored numbers\";\n\nmsg.originalPayload = msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 60,
+        "wires": [
+            [
+                "291dc9f55879b32b"
+            ]
+        ]
+    },
+    {
         "id": "6ffc015ea2bf85db",
         "type": "admin",
         "z": "65a87a366f49e48f",
@@ -1062,7 +1163,7 @@
         "y": 240,
         "wires": [
             [
-                "1be7c3c027f538b1"
+                "fe414e024d0629af"
             ]
         ]
     },
@@ -1071,7 +1172,7 @@
         "type": "subflow:c56f0dbb98ac693b",
         "z": "65a87a366f49e48f",
         "name": "",
-        "x": 620,
+        "x": 860,
         "y": 240,
         "wires": [
             [
@@ -1123,7 +1224,7 @@
         "type": "subflow:667d2d197388920a",
         "z": "65a87a366f49e48f",
         "name": "",
-        "x": 430,
+        "x": 670,
         "y": 240,
         "wires": [
             [
@@ -1136,7 +1237,7 @@
         "type": "subflow:5a60023df15c7e9e",
         "z": "65a87a366f49e48f",
         "name": "",
-        "x": 810,
+        "x": 1050,
         "y": 240,
         "wires": [
             [
@@ -1158,7 +1259,7 @@
         "links": [
             "8009d04aa4154fbf"
         ],
-        "x": 945,
+        "x": 1185,
         "y": 220,
         "wires": []
     },
@@ -1171,7 +1272,7 @@
         "links": [
             "facf26fe7588dc02"
         ],
-        "x": 945,
+        "x": 1185,
         "y": 280,
         "wires": []
     },
@@ -1188,7 +1289,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 900,
+        "x": 1140,
         "y": 340,
         "wires": []
     },
@@ -1205,8 +1306,41 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
+        "x": 1130,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "fe414e024d0629af",
+        "type": "subflow:e0f3ca8bbce2e760",
+        "z": "65a87a366f49e48f",
+        "name": "",
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "1be7c3c027f538b1"
+            ],
+            [
+                "9fe9f0b091105e22"
+            ]
+        ]
+    },
+    {
+        "id": "9fe9f0b091105e22",
+        "type": "debug",
+        "z": "65a87a366f49e48f",
+        "name": "Ignored number - message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 320,
         "wires": []
     },
     {
