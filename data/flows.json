@@ -149,7 +149,7 @@
                         "port": 0
                     },
                     {
-                        "id": "b7d9b297592028e0",
+                        "id": "2a5a25357bcc5d23",
                         "port": 0
                     }
                 ]
@@ -569,7 +569,7 @@
         "type": "function",
         "z": "a62245f8c0764ebb",
         "name": "Job description",
-        "func": "msg.topic = \"step 1 - job description\";\n\nif (msg.openTextEnabled) {\n    msg.payload = `Gracias, ${msg.payload}. Es un gusto conocerte 😊. En breve te contaremos cómo puedes formar parte del estudio.`\n    msg.openTextEnabled = false;\n    return [null, msg];\n}\n\nmsg.payload = `📝 Gracias por tu interés en Digital Desire Studio\n¡Nos alegra que quieras conocer más sobre esta oportunidad! 🎉\nSomos un estudio webcam ubicado en Soacha, Cundinamarca, enfocado en brindar un ambiente profesional, respetuoso y seguro para modelos que desean generar ingresos reales desde el primer mes.\n\n💼 Lo que ofrecemos:\n🔹 Espacios privados con buena iluminación, comodidad y conexión estable\n🔹 Horarios flexibles: tú decides cuándo trabajar\n🔹 Pagos puntuales cada semana\n🔹 Capacitación personalizada y acompañamiento constante\n🔹 Estrategias para posicionarte y aumentar tus ganancias\n🔹 Ingresos variables desde $800.000, dependiendo de tu tiempo de conexión, constancia y actitud frente a cámara\n🔹 Ambiente discreto, libre de presiones y con respaldo legal\n\n👥 ¿A quién buscamos?\nPersonas mayores de 18 años, con buena actitud, responsabilidad y ganas de aprender.\nNo necesitas experiencia previa — nosotros te formamos desde cero.\n\n🪪 ¿Cómo empezar?\nSi estás interesad@, simplemente escríbenos tu nombre para comenzar.\nNuestro equipo te dará la bienvenida y te explicará los siguientes pasos para agendar una entrevista (presencial o virtual si tienes equipo en casa).\n💡 Tu información será tratada con absoluta confidencialidad desde el primer mensaje.\n\n✨ Si tienes dudas adicionales, estamos aquí para responderlas y acompañarte en este camino de crecimiento personal y económico.\nEn Digital Desire Studio, tu deseo se convierte en libertad y resultados.\n`;\nmsg.openTextEnabled = true;\n\nreturn [msg, null];",
+        "func": "msg.topic = \"step 1 - job description\";\n\nif (msg.openTextEnabled) {\n    msg.payload = `Gracias, ${msg.payload}. Es un gusto conocerte 😊. En breve te contaremos cómo puedes formar parte del estudio.`\n    msg.openTextEnabled = false;\n    return [null, msg];\n}\n\nmsg.payload = `📝 Gracias por tu interés en Digital Desire Studio\n¡Nos alegra que quieras conocer más sobre esta oportunidad! 🎉\nSomos un estudio webcam ubicado en Soacha, Cundinamarca, enfocado en brindar un ambiente profesional, respetuoso y seguro para modelos que desean generar ingresos reales desde el primer mes.\n\n💼 Lo que ofrecemos:\n🔹 Espacios privados con buena iluminación, comodidad y conexión estable\n🔹 Horarios flexibles: tú decides cuándo trabajar\n🔹 Pagos puntuales cada semana\n🔹 Capacitación personalizada y acompañamiento constante\n🔹 Estrategias para posicionarte y aumentar tus ganancias\n🔹 Ingresos variables dependiendo de tu tiempo de conexión, constancia y actitud frente a cámara\n🔹 Ambiente discreto, libre de presiones y con respaldo legal\n\n👥 ¿A quién buscamos?\nPersonas mayores de 18 años, con buena actitud, responsabilidad y ganas de aprender.\nNo necesitas experiencia previa — nosotros te formamos desde cero.\n\n🪪 ¿Cómo empezar?\nSi estás interesad@, simplemente escríbenos tu nombre para comenzar.\n\nNuestro equipo te dará la bienvenida y te explicará los siguientes pasos para agendar una entrevista (presencial o virtual si tienes equipo en casa).\n💡 Tu información será tratada con absoluta confidencialidad desde el primer mensaje.\n\n✨ Si tienes dudas adicionales, estamos aquí para responderlas y acompañarte en este camino de crecimiento personal y económico.\nEn Digital Desire Studio, tu deseo se convierte en libertad y resultados.\n\nEscribe Volver si no estas interesado en esta opción.\n`;\nmsg.openTextEnabled = true;\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -590,14 +590,46 @@
         "type": "function",
         "z": "a62245f8c0764ebb",
         "name": "Forward the message",
-        "func": "\nreturn msg;",
+        "func": "msg.originalToNumber = msg.toNumber;\nmsg.originalPayload = msg.payload;\n\nmsg.toNumber = [\"+573125752473\", \"+51987142078\"];\nmsg.payload = `Interesado ${msg.originalFullPayload} telefono: ${msg.from}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "b4a69f13880826a2",
+                "2a5a25357bcc5d23"
+            ]
+        ]
+    },
+    {
+        "id": "b4a69f13880826a2",
+        "type": "chats-out",
+        "z": "a62245f8c0764ebb",
+        "name": "Chats Out",
+        "whatsappLink": "d5f9b2d1bb7113be",
+        "number": "",
+        "x": 740,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2a5a25357bcc5d23",
+        "type": "function",
+        "z": "a62245f8c0764ebb",
+        "name": "Restore",
+        "func": "msg.toNumber = msg.originalToNumber;\nmsg.payload = msg.originalPayload;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
         "y": 180,
         "wires": [
             []
@@ -1177,7 +1209,7 @@
         "type": "function",
         "z": "65a87a366f49e48f",
         "name": "Config",
-        "func": "msg.topic = \"Config\";\n\nmsg.toNumber = msg.from;\nmsg.openTextEnabled = false;\n\nreturn msg;",
+        "func": "msg.topic = \"Config\";\n\nmsg.originalFullPayload = msg.payload;\nmsg.toNumber = msg.from;\nmsg.openTextEnabled = false;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
