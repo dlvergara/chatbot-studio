@@ -125,7 +125,7 @@
     {
         "id": "a62245f8c0764ebb",
         "type": "subflow",
-        "name": "Step 1 - Mirror",
+        "name": "Step 1 - Job description",
         "info": "",
         "category": "",
         "in": [
@@ -141,11 +141,15 @@
         ],
         "out": [
             {
-                "x": 500,
-                "y": 80,
+                "x": 760,
+                "y": 60,
                 "wires": [
                     {
                         "id": "338c1dba48ddedf0",
+                        "port": 0
+                    },
+                    {
+                        "id": "b7d9b297592028e0",
                         "port": 0
                     }
                 ]
@@ -158,7 +162,7 @@
     {
         "id": "74c51e0b706bcc4d",
         "type": "subflow",
-        "name": "Step 2 - Hi",
+        "name": "Step 2 - About us",
         "info": "",
         "category": "",
         "in": [
@@ -547,7 +551,7 @@
         "type": "function",
         "z": "919b80125f8dab08",
         "name": "Greetings",
-        "func": "msg.topic = \"Greetings\";\n\nmsg.payload = `👋 ¡Hola! Gracias por comunicarte con nosotros.\nSoy tu asistente virtual y estoy aquí para ayudarte. Por favor, responde con el número o la palabra clave que mejor se ajuste a lo que necesitas:\n0️⃣ Volver al menú principal (también puedes escribir \"volver\")\n1️⃣ Jugar al espejo\n2️⃣ Te enviara Hi!\n3️⃣ Hablar con un asesor humano (o simplemente escribe \"*\") hará forward de tu mensaje a otro número\n💬 Escribe solo el número de la opción o la palabra \"volver\" para continuar.\n`;\n\n//4️⃣ Otros\n\nmsg.openTextEnabled = false;\n\nreturn msg;",
+        "func": "msg.topic = \"Greetings\";\n\nmsg.payload = `🌟 Bienvenidos a Digital Desire Studio\n¿Buscas una oportunidad de trabajo segura, rentable y empoderadora?\nTe damos la bienvenida a Digital Desire Studio, un nuevo estudio webcam comprometido con la excelencia, el respeto y la evolución digital.\n\n👋 Gracias por comunicarte con nosotros.\nSoy un asistente virtual y estoy aquí para ayudarte. \nPor favor, responde con el número o la palabra clave que mejor se ajuste a lo que necesitas:\n0️⃣ Volver al menú principal (también puedes escribir \"volver\")\n1️⃣ Información de la oferta laboral\n2️⃣ Información del estudio\n3️⃣ Hablar con un asesor humano\n💬 Escribe solo el número de la opción o la palabra \"volver\" para continuar.\n`;\n\n//4️⃣ Otros\n\nmsg.openTextEnabled = false;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -564,16 +568,37 @@
         "id": "338c1dba48ddedf0",
         "type": "function",
         "z": "a62245f8c0764ebb",
-        "name": "Mirror",
-        "func": "msg.topic = \"step 1\";\n\nif (msg.payload) {\n    let input = msg.payload.trim();\n    let option = input.charAt(0);\n    \n    if (!isNaN(option)) {\n        msg.currentStep = option;\n        msg.openTextEnabled = false;\n    }\n}\n\nmsg.payload = \"Gracias, ahora jugaremos al espejo: \" + msg?.payload;\nmsg.openTextEnabled = true;\n\nreturn msg;",
+        "name": "Job description",
+        "func": "msg.topic = \"step 1 - job description\";\n\nif (msg.openTextEnabled) {\n    msg.payload = `Gracias, ${msg.payload}. Es un gusto conocerte 😊. En breve te contaremos cómo puedes formar parte del estudio.`\n    msg.openTextEnabled = false;\n    return [null, msg];\n}\n\nmsg.payload = `📝 Gracias por tu interés en Digital Desire Studio\n¡Nos alegra que quieras conocer más sobre esta oportunidad! 🎉\nSomos un estudio webcam ubicado en Soacha, Cundinamarca, enfocado en brindar un ambiente profesional, respetuoso y seguro para modelos que desean generar ingresos reales desde el primer mes.\n\n💼 Lo que ofrecemos:\n🔹 Espacios privados con buena iluminación, comodidad y conexión estable\n🔹 Horarios flexibles: tú decides cuándo trabajar\n🔹 Pagos puntuales cada semana\n🔹 Capacitación personalizada y acompañamiento constante\n🔹 Estrategias para posicionarte y aumentar tus ganancias\n🔹 Ingresos variables desde $800.000, dependiendo de tu tiempo de conexión, constancia y actitud frente a cámara\n🔹 Ambiente discreto, libre de presiones y con respaldo legal\n\n👥 ¿A quién buscamos?\nPersonas mayores de 18 años, con buena actitud, responsabilidad y ganas de aprender.\nNo necesitas experiencia previa — nosotros te formamos desde cero.\n\n🪪 ¿Cómo empezar?\nSi estás interesad@, simplemente escríbenos tu nombre para comenzar.\nNuestro equipo te dará la bienvenida y te explicará los siguientes pasos para agendar una entrevista (presencial o virtual si tienes equipo en casa).\n💡 Tu información será tratada con absoluta confidencialidad desde el primer mensaje.\n\n✨ Si tienes dudas adicionales, estamos aquí para responderlas y acompañarte en este camino de crecimiento personal y económico.\nEn Digital Desire Studio, tu deseo se convierte en libertad y resultados.\n`;\nmsg.openTextEnabled = true;\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "b7d9b297592028e0"
+            ]
+        ]
+    },
+    {
+        "id": "b7d9b297592028e0",
+        "type": "function",
+        "z": "a62245f8c0764ebb",
+        "name": "Forward the message",
+        "func": "\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 290,
-        "y": 80,
+        "x": 530,
+        "y": 180,
         "wires": [
             []
         ]
@@ -582,15 +607,15 @@
         "id": "fd87d1f4524a286d",
         "type": "function",
         "z": "74c51e0b706bcc4d",
-        "name": "Hi!",
-        "func": "msg.topic = \"step 2\";\n\nmsg.payload = \"Hi!\";\n\nreturn msg;",
+        "name": "About us",
+        "func": "msg.topic = \"step 2\";\n\nmsg.payload = `🎯 ¿Quiénes somos?\nEn Digital Desire Studio creemos que el deseo digital es una forma de arte. Nuestro estudio nace como un espacio moderno, seguro y profesional para creadores y modelos que quieran transformar su tiempo en ingresos, bajo un ambiente cálido, respetuoso y sin tabúes.\nCon tecnología de punta, formación personalizada y respaldo legal, nuestro equipo te acompaña desde el primer día para que logres tus metas financieras con tranquilidad y libertad.\n\n💼 ¿Qué ofrecemos?\n✅ Espacio privado y equipado con iluminación profesional y conexión estable\n✅ Horarios flexibles adaptados a tus tiempos\n✅ Pagos semanales puntuales\n✅ Acompañamiento en marketing personal, redes y performance\n✅ Capacitación inicial y asesoría permanente\n✅ Ambiente discreto, libre de presiones\n\n👤 ¿A quién estamos buscando?\nSi eres mayor de 18 años, tienes actitud, profesionalismo y estás listo para dar lo mejor de ti frente a cámara, queremos conocerte.\nNo se necesita experiencia previa — solo ganas de aprender, crecer y brillar.\n\n📍 Nuestra ubicación\nEstamos en Soacha, Cundinamarca, en una zona segura y de fácil acceso.\nTambién consideramos modalidad remota si cuentas con equipo propio.\n\n📲 ¿Te interesa ?\n    Contáctanos por WhatsApp 📱\n🔹 Horario de atención: lunes a viernes, 9am a 6pm\nTambién puedes enviarnos tu perfil a deseodigitalstudio@gmail.com\nConfidencialidad garantizada desde el primer contacto.\n\n✨ Únete a Digital Desire Studio\nTu deseo. Tu espacio. Tu libertad.\nCreamos experiencias, potenciamos talentos, respetamos tu camino.`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 340,
         "y": 40,
         "wires": [
             []
@@ -759,7 +784,7 @@
         "type": "function",
         "z": "5a60023df15c7e9e",
         "name": "Set current step from payload",
-        "func": "msg.topic = \"Set current step from payload\";\n\nif (msg.openTextEnabled == true) {\n    return [msg, null];\n}\n\nif (msg.payload) {\n\n    let input = msg.payload?.trim().toLowerCase();\n    \n    // if is a number\n    let option = input.charAt(0);\n    if (!isNaN(option)) {\n        msg.currentStep = option;\n        msg.wrongOptionCounter = 0;\n\n        return [msg, null];\n    }\n    \n}\n\n// if is not a number or there is no payload\nmsg.payload = `❗ Lo siento, no reconocí esa opción. Por favor, responde solo con el número de la opción que prefieras.\n💡 Por ejemplo, escribe \"2\"`;\n\nreturn [null, msg];\n",
+        "func": "msg.topic = \"Set current step from payload\";\n\nif (msg.openTextEnabled == true) {\n    return [msg, null];\n}\n\nif (msg.payload) {\n\n    let input = msg.payload?.trim().toLowerCase();\n    \n    // if is a number\n    let option = input.charAt(0);\n    if (!isNaN(option)) {\n        msg.currentStep = option;\n        msg.wrongOptionCounter = 0;\n\n        return [msg, null];\n    }\n    \n}\n\n// if is not a number or there is no payload\nmsg.payload = `❗ Lo siento, no reconocí esa opción. Por favor, responde solo con el número de la opción que prefieras.\n💡 Por ejemplo, escribe \"2\" o Volver`;\n\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1019,7 +1044,7 @@
         "type": "function",
         "z": "e0f3ca8bbce2e760",
         "name": "Find in the ignored collection",
-        "func": "msg.ignoredData = msg.payload;\nlet currentNumber = msg.from;\n\nlet sessionData = msg.ignoredData.filter(obj => obj[0] === currentNumber);\nlet rowId = msg.payload.findIndex(row => row[0] === currentNumber);\n\nif (sessionData !== undefined) {\n    return [null, msg];\n}\n\nmsg.payload = msg.originalPayload;\n\nreturn [msg, null];",
+        "func": "msg.ignoredNumbers = msg.payload;\nmsg.payload = msg.originalPayload;\nlet currentNumber = msg.from;\n\nlet sessionData = msg.ignoredNumbers.filter(obj => obj[0] === currentNumber);\nmsg.data = sessionData;\n\nif (sessionData !== undefined && sessionData.length > 0) {\n    return [null, msg];\n}\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1172,7 +1197,7 @@
         "type": "subflow:c56f0dbb98ac693b",
         "z": "65a87a366f49e48f",
         "name": "",
-        "x": 860,
+        "x": 880,
         "y": 240,
         "wires": [
             [
@@ -1224,7 +1249,7 @@
         "type": "subflow:667d2d197388920a",
         "z": "65a87a366f49e48f",
         "name": "",
-        "x": 670,
+        "x": 690,
         "y": 240,
         "wires": [
             [
@@ -1521,7 +1546,7 @@
         "type": "subflow:a62245f8c0764ebb",
         "z": "bfe4d5e77e44d0c2",
         "name": "",
-        "x": 770,
+        "x": 730,
         "y": 160,
         "wires": [
             [
@@ -1534,7 +1559,7 @@
         "type": "subflow:74c51e0b706bcc4d",
         "z": "bfe4d5e77e44d0c2",
         "name": "",
-        "x": 750,
+        "x": 770,
         "y": 220,
         "wires": [
             [
