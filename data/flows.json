@@ -816,7 +816,7 @@
         "type": "function",
         "z": "5a60023df15c7e9e",
         "name": "Set current step from payload",
-        "func": "msg.topic = \"Set current step from payload\";\n\nif (msg.openTextEnabled == true) {\n    return [msg, null];\n}\n\nif (msg.payload) {\n\n    let input = msg.payload?.trim().toLowerCase();\n    \n    // if is a number\n    let option = input.charAt(0);\n    if (!isNaN(option)) {\n        msg.currentStep = option;\n        msg.wrongOptionCounter = 0;\n\n        return [msg, null];\n    }\n    \n}\n\n// if is not a number or there is no payload\nmsg.payload = `❗ Lo siento, no reconocí esa opción. Por favor, responde solo con el número de la opción que prefieras.\n💡 Por ejemplo, escribe \"2\" o Volver`;\n\nreturn [null, msg];\n",
+        "func": "msg.topic = \"Set current step from payload\";\n\nif (msg.openTextEnabled == true) {\n    return [msg, null];\n}\n\nif (msg.payload) {\n\n    let input = msg.payload?.trim().toLowerCase();\n    \n    // if is a number\n    let option = input.charAt(0);\n    if (!isNaN(option)) {\n        msg.currentStep = option;\n        msg.wrongOptionCounter = 0;\n\n        return [msg, null];\n    }\n}\n\n// if is not a number or there is no payload\nmsg.payload = `❗ Lo siento, no reconocí esa opción. Por favor, responde solo con el número de la opción que prefieras.\n💡 Por ejemplo, escribe \"2\" o Volver`;\n\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1517,7 +1517,7 @@
                 "7b5e038668715e34"
             ],
             [
-                "7b5e038668715e34"
+                "6ac0493c33bba2e2"
             ]
         ]
     },
@@ -1608,7 +1608,8 @@
             "fe591ca4dcdd4f10",
             "08244b4233c84848",
             "56e8a1d7adfdd98e",
-            "a3e28028ed25137b"
+            "a3e28028ed25137b",
+            "9a0155c7e078e61c"
         ],
         "x": 115,
         "y": 400,
@@ -1689,6 +1690,39 @@
                 "154a1e1686f61e7f"
             ]
         ]
+    },
+    {
+        "id": "6ac0493c33bba2e2",
+        "type": "function",
+        "z": "bfe4d5e77e44d0c2",
+        "name": "Is not a valid option",
+        "func": "// if is not a number or there is no payload\nmsg.payload = `❗ Lo siento, no reconocí esa opción. Por favor, responde con una opción entre 1 y 3.\n💡 Por ejemplo, escribe \"1\" o Volver`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 340,
+        "wires": [
+            [
+                "9a0155c7e078e61c"
+            ]
+        ]
+    },
+    {
+        "id": "9a0155c7e078e61c",
+        "type": "link out",
+        "z": "bfe4d5e77e44d0c2",
+        "name": "link out 13",
+        "mode": "link",
+        "links": [
+            "f5c90ea1447ad7a4"
+        ],
+        "x": 905,
+        "y": 340,
+        "wires": []
     },
     {
         "id": "facf26fe7588dc02",
