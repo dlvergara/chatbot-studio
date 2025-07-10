@@ -1025,15 +1025,15 @@
         "id": "61e76b8313809dcd",
         "type": "function",
         "z": "df7e0638e6f4ae7b",
-        "name": "function 3",
-        "func": "//msg.toNumber = \"573026654627\";\n\nreturn msg;",
+        "name": "Set the forward message",
+        "func": "msg.originalToNumber = msg.toNumber;\nmsg.originalPayload = msg.payload;\n\nmsg.toNumber = [\"+573125752473\", \"+51987142078\"];\nmsg.payload = `Este número quiere ponerse en contacto directo +${msg.from}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
+        "x": 330,
         "y": 80,
         "wires": [
             [
@@ -1047,7 +1047,7 @@
         "z": "df7e0638e6f4ae7b",
         "name": "Chats Out",
         "whatsappLink": "d5f9b2d1bb7113be",
-        "number": "573026654627",
+        "number": "",
         "x": 480,
         "y": 180,
         "wires": []
