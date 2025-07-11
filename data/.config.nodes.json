@@ -520,5 +520,58 @@
                 "file": "/usr/src/app/data/node_modules/node-red-contrib-google-sheets/gsheet.js"
             }
         }
+    },
+    "node-red-contrib-google-calendar": {
+        "name": "node-red-contrib-google-calendar",
+        "version": "0.1.5",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "google-api-config": {
+                "name": "google-api-config",
+                "types": [
+                    "google-credentials",
+                    "google-api-config"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-google-calendar",
+                "file": "/usr/src/app/data/node_modules/node-red-contrib-google-calendar/source/google.js"
+            },
+            "addEvent": {
+                "name": "addEvent",
+                "types": [
+                    "addEvent"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-google-calendar",
+                "file": "/usr/src/app/data/node_modules/node-red-contrib-google-calendar/source/addEvent.js"
+            },
+            "getEvent": {
+                "name": "getEvent",
+                "types": [
+                    "GetEvent"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-google-calendar",
+                "file": "/usr/src/app/data/node_modules/node-red-contrib-google-calendar/source/getEvent.js"
+            },
+            "updateEvent": {
+                "name": "updateEvent",
+                "types": [
+                    "updateEvent"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-google-calendar",
+                "file": "/usr/src/app/data/node_modules/node-red-contrib-google-calendar/source/updateEvent.js"
+            }
+        }
     }
 }
