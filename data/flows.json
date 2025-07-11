@@ -287,11 +287,11 @@
         ],
         "out": [
             {
-                "x": 580,
-                "y": 60,
+                "x": 650,
+                "y": 40,
                 "wires": [
                     {
-                        "id": "61e76b8313809dcd",
+                        "id": "096fe1e382594f83",
                         "port": 0
                     }
                 ]
@@ -576,7 +576,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
+        "x": 200,
         "y": 80,
         "wires": [
             [],
@@ -597,8 +597,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 240,
+        "x": 380,
+        "y": 220,
         "wires": [
             [
                 "b4a69f13880826a2",
@@ -613,8 +613,8 @@
         "name": "Chats Out",
         "whatsappLink": "d5f9b2d1bb7113be",
         "number": "",
-        "x": 740,
-        "y": 300,
+        "x": 660,
+        "y": 280,
         "wires": []
     },
     {
@@ -629,8 +629,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
-        "y": 180,
+        "x": 650,
+        "y": 160,
         "wires": [
             []
         ]
@@ -777,8 +777,8 @@
         "links": [
             "75e5004497f4372e"
         ],
-        "x": 165,
-        "y": 220,
+        "x": 255,
+        "y": 160,
         "wires": []
     },
     {
@@ -803,7 +803,6 @@
         "y": 80,
         "wires": [
             [
-                "cf61de80999ced60",
                 "08d484ff0f514443"
             ],
             [
@@ -854,8 +853,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 680,
-        "y": 720,
+        "x": 630,
+        "y": 460,
         "wires": [
             [
                 "d04017593984397c"
@@ -870,7 +869,7 @@
         "type": "subflow:787475794948efdc",
         "z": "5a60023df15c7e9e",
         "name": "",
-        "x": 630,
+        "x": 450,
         "y": 460,
         "wires": [
             [
@@ -887,8 +886,8 @@
         "links": [
             "44b93aa4db9fb355"
         ],
-        "x": 795,
-        "y": 760,
+        "x": 745,
+        "y": 540,
         "wires": []
     },
     {
@@ -957,8 +956,8 @@
         "links": [
             "75e5004497f4372e"
         ],
-        "x": 795,
-        "y": 680,
+        "x": 745,
+        "y": 400,
         "wires": []
     },
     {
@@ -973,30 +972,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
+        "x": 190,
         "y": 460,
         "wires": [
             [
                 "a3abb621cf4d70fc"
             ]
         ]
-    },
-    {
-        "id": "cf61de80999ced60",
-        "type": "debug",
-        "z": "5a60023df15c7e9e",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 390,
-        "y": 40,
-        "wires": []
     },
     {
         "id": "08d484ff0f514443",
@@ -1033,11 +1015,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 80,
+        "x": 240,
+        "y": 40,
         "wires": [
             [
-                "3fce5ceeeabe73fa"
+                "3fce5ceeeabe73fa",
+                "096fe1e382594f83"
             ]
         ]
     },
@@ -1048,9 +1031,27 @@
         "name": "Chats Out",
         "whatsappLink": "d5f9b2d1bb7113be",
         "number": "",
-        "x": 480,
-        "y": 180,
+        "x": 390,
+        "y": 140,
         "wires": []
+    },
+    {
+        "id": "096fe1e382594f83",
+        "type": "function",
+        "z": "df7e0638e6f4ae7b",
+        "name": "response",
+        "func": "msg.payload = `🤝 Gracias por tu solicitud para hablar con un asesor humano.\nTu mensaje ha sido enviado a nuestro equipo, y uno de nuestros administradores te responderá en breve.\n⌛ Por favor, ten paciencia mientras te asignamos la atención personalizada que mereces.\n🙋‍♀️ Estamos aquí para ayudarte.\n\n¿Quieres una versión con el nombre del usuario si ya lo tienes almacenado en el flujo? También puedo ayudarte a preparar una lógica que redireccione automáticamente o registre esta solicitud internamente para que el equipo la vea. 🛠️💬`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 40,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "291dc9f55879b32b",
@@ -1412,27 +1413,9 @@
         "y": 40,
         "wires": [
             [
-                "5b218f319c647b9f",
                 "1936a2dac95c36d3"
             ]
         ]
-    },
-    {
-        "id": "5b218f319c647b9f",
-        "type": "debug",
-        "z": "bfe4d5e77e44d0c2",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 280,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "1936a2dac95c36d3",
