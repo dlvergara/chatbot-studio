@@ -44,6 +44,8 @@ RUN rm -rf node_modules package-lock.json \
 
 RUN npm install node-red-contrib-google-sheets
 
+RUN npm install
+
 # Define volumen para persistencia de datos
 VOLUME /usr/src/app/data
 
