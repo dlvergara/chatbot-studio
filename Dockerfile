@@ -40,9 +40,10 @@ RUN mkdir -p /usr/local/lib/node_modules \
 
 # Instala el módulo de WhatsApp en Node-RED
 RUN rm -rf node_modules package-lock.json \
-    && npm install --no-cache --legacy-peer-deps node-red-contrib-whatsapp-link
+    && npm install --no-cache --legacy-peer-deps node-red-contrib-whatsapp-link --save
 
-RUN npm install node-red-contrib-google-sheets
+RUN npm install node-red-contrib-google-sheets --save
+RUN npm install dotenv --save
 
 # Define volumen para persistencia de datos
 VOLUME /usr/src/app/data

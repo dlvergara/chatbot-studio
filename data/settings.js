@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 /**
  * This is the default settings file provided by Node-RED.
  *
@@ -511,6 +513,7 @@ module.exports = {
      */
     functionGlobalContext: {
         // os:require('os'),
+        env: process.env
     },
 
     /** The maximum number of messages nodes will buffer internally as part of their

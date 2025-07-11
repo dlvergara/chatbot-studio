@@ -1,0 +1,9 @@
+{
+    "googleapis": {
+        "spec": "googleapis",
+        "module": "googleapis",
+        "subpath": "",
+        "builtin": false,
+        "known": false
+    }
+}

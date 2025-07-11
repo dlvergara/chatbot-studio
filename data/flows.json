@@ -1466,12 +1466,17 @@
                 "vt": "num"
             },
             {
+                "t": "eq",
+                "v": "agendar",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 9,
+        "outputs": 10,
         "x": 170,
         "y": 160,
         "wires": [
@@ -1498,6 +1503,9 @@
             ],
             [
                 "7b5e038668715e34"
+            ],
+            [
+                "4371fa6159d4b969"
             ],
             [
                 "6ac0493c33bba2e2"
@@ -1706,6 +1714,77 @@
         "x": 905,
         "y": 340,
         "wires": []
+    },
+    {
+        "id": "4371fa6159d4b969",
+        "type": "function",
+        "z": "bfe4d5e77e44d0c2",
+        "name": "function 3",
+        "func": "let jwtClient = new gapis.google.auth.JWT(\n    env.GOOGLE_CLIENT_EMAIL,\n    null,\n    env.GOOGLE_PRIVATE_KEY,\n    ['https://www.googleapis.com/auth/calendar',\n    'https://www.googleapis.com/auth/drive']\n);\nconst calendarId = \"david.l.vergara@gmail.com\";\n\nfunction getEventsForDate(calendarId, date) {\n    const calendar = gapis.google.calendar({ version: 'v3', auth: jwtClient });\n    const start = new Date(date);\n    const end = new Date(date);\n    end.setHours(23, 59, 59, 999);\n\n    return calendar.events.list({\n        calendarId,\n        timeMin: start.toISOString(),\n        timeMax: end.toISOString(),\n        singleEvents: true,\n        orderBy: 'startTime',\n    });\n}\n\ngetEventsForDate(calendarId, \"2025-07-11\")\n.then(res => {\n    msg.payload = res.data.items;\n    node.send(msg);\n})\n.catch(err => {\n    node.error(\"Error al obtener eventos: \" + err);\n});\n\nreturn null;\n\n/*\njwtClient.authorize(function (err, tokens) {\n    if (err) {\n        node.error(\"Auth Error: \" + err);\n        return;\n    } else {\n        //console.log(jwtClient);\n        const calendar = gapis.google.calendar({ version: 'v3', auth: jwtClient });\n        let date = \"2025-07-10\";\n\n        const startOfDay = new Date(date);\n        const endOfDay = new Date(date);\n        endOfDay.setHours(23, 59, 59, 999);\n\n        const res = await calendar.events.list({\n            calendarId,\n            timeMin: startOfDay.toISOString(),\n            timeMax: endOfDay.toISOString(),\n            singleEvents: true,\n            orderBy: 'startTime',\n        });\n\n    }\n});\n*/\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "gapis",
+                "module": "googleapis"
+            }
+        ],
+        "x": 710,
+        "y": 500,
+        "wires": [
+            [
+                "d9076c0235bf1fa5"
+            ]
+        ]
+    },
+    {
+        "id": "d9076c0235bf1fa5",
+        "type": "debug",
+        "z": "bfe4d5e77e44d0c2",
+        "name": "jwt",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "3a21549e568e74bd",
+        "type": "inject",
+        "z": "bfe4d5e77e44d0c2",
+        "name": "inject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 470,
+        "y": 540,
+        "wires": [
+            [
+                "4371fa6159d4b969"
+            ]
+        ]
     },
     {
         "id": "facf26fe7588dc02",
