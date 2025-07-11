@@ -7,6 +7,7 @@ services:
     volumes:
       - ./data:/usr/src/app/data      # Carpeta persistente en Windows
       - ./flows:/usr/src/app/flows    # Almacén de flujos de Node-RED
+      - ./data/.env:/usr/src/app/.env
     environment:
       - NODE_OPTIONS=--max-old-space-size=2048  # Optimiza el rendimiento de Node.js
     restart: unless-stopped
